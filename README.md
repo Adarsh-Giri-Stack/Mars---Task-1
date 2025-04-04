@@ -1,25 +1,25 @@
 # Mars---Task-1
 
 By doing this task i have learnt how to use an arduino , how to give connections to all the components and how to code into the arduino using c++ , all from scratch . 
-it was an amazing experience for me since i always had ideas in my mind but never knew how such things work . Now i feel confident about how to use them and make them work !!.
-my first project is on intruder dectection system 
-second is on automatic plant watering system 
-and third is on Fire Detection system .
+It was an amazing experience for me since i always had ideas in my mind but never knew how such things work . Now i feel confident about how to use them and make them work !!.
+My first project is on Intruder dectection system 
+Second is on Automatic plant watering system 
+And third is on Fire Detection system .
 
 1) I learnt the basics of arduino microcontroller
 2) Then I went through the basics of tinkerCAD .
 3) After which I read about the sensors listed .
-4) after which I made up three ideas and started working on it.
+4) Further, I made up three ideas and started working on it.
 
 Project 1):
-project 1 is about "Intruder Detection System" 
+Project 1 is about "Intruder Detection System" 
 ->The PIR sensor is ude to detect motion
 ->The Ultrasonic Sensor is used to measure the distance at which the intruder is standing from the door.
 
 The buzzer goes on if - The distance between intruder and door is less than 50 and motion is detected.
 
 Project 2):
-project 2 is about "Automatic PLant Watering System"
+Project 2 is about "Automatic PLant Watering System"
 ->The soil moisture sensor used measures the moisture level in the soil .
 ->The temperature sensor used measures the outside temperature. 
 
@@ -39,7 +39,7 @@ A servo is used to adjust the opening angles corresponding to the respective moi
 
 
 Project 3):
-project 3 is about "Fire detection system"
+Project 3 is about "Fire detection system"
 -> Gas sensor is used to detect gas or smoke.
 -> Temperature sensor is used to measure the temperature.
 
