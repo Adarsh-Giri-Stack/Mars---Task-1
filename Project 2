@@ -1,0 +1,99 @@
+#include <Servo.h>
+#define SOIL_MOISTURE_PIN A0   // Soil Moisture Sensor Pin (Analog)
+#define LED_PIN 13             // LED pin (optional)
+#define TEMP_PIN A1
+
+int y=0;
+int x=0;
+int i=0;
+
+Servo servo;
+
+void setup() {
+  pinMode(SOIL_MOISTURE_PIN, INPUT);
+  servo.attach(7);
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(TEMP_PIN, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int soilMoisture = analogRead(SOIL_MOISTURE_PIN); // Read soil moisture level
+  int temperature_value = analogRead(TEMP_PIN);
+  int moistureLevel = map(soilMoisture, 0, 1023, 0, 100); // Convert to percentage(0-100)
+  float temperature = (temperature_value-20)/3.38;
+  
+  // Output values to serial monitor for debugging
+  Serial.print("Soil Moisture: ");
+  Serial.print(moistureLevel);
+  Serial.println("%");
+  Serial.print("Temperature: ");
+  Serial.print(temperature);
+  Serial.println(" C");
+  if ( moistureLevel >30 && temperature <35)
+  {
+    y=0;
+  }
+  else if ( moistureLevel <30 && temperature <35)
+  {
+    y=1;
+  }
+  else if (moistureLevel >30 && temperature >35)
+  {
+    y=2;
+  }
+  else 
+  {
+    y=3;
+  }
+  if (y!=x)
+  {
+    i=0;
+    Serial.println(y);
+    Serial.println(x);
+    servo.write(0);
+  }
+  // If soil moisture is below threshold (e.g., 30%), activate the water pump
+  if (moistureLevel < 30 && temperature > 35) 
+  {
+	for (i;i<=180;i+=18)
+    {
+    	servo.write(i);
+        delay(100);
+    }
+    x=y;
+	digitalWrite(LED_PIN, HIGH); // Turn on LED to indicate watering
+    Serial.println("Watering the plant!");
+  } 
+  else if ( moistureLevel > 30 && temperature > 35)
+  {
+	for (i;i<90;i+=9)
+    {
+    	servo.write(i);
+        delay(100);
+    }
+    x=y;
+	digitalWrite(LED_PIN, LOW); // Turn off LED
+    Serial.println("Soil moisture is sufficient.");
+  }
+  else if ( moistureLevel < 30 && temperature < 35)
+  {
+	for (i;i<45;i+=5)
+    {
+    	servo.write(i);
+        delay(100);
+    }
+    x=y;
+	digitalWrite(LED_PIN, LOW); // Turn off LED
+    Serial.println("Soil moisture is sufficient.");
+  }
+  else
+  {
+	x=y;
+	digitalWrite(LED_PIN, LOW); // Turn off LED
+    Serial.println("Soil moisture is sufficient.");
+  }
+  
+  
+  delay(1000); // Wait for 5 seconds before checking again
+}
