@@ -1,0 +1,45 @@
+#define LED_Sensor 7
+#define Piezo_Buzzer 5
+#define Temperature_Sensor A0
+#define Gas_Sensor A1
+
+void setup()
+{
+  pinMode(LED_Sensor, OUTPUT);
+  pinMode(Piezo_Buzzer,OUTPUT);
+  pinMode(Temperature_Sensor,INPUT);
+  pinMode(Gas_Sensor,INPUT);
+  Serial.begin(9600);
+  
+}
+
+void loop()
+{
+  int raw_temperature=analogRead(Temperature_Sensor);
+  int Gas_measure=analogRead(Gas_Sensor);
+  float temperature=(raw_temperature-20.00)/3.38;  //this maps the temperature between 1-100
+  int gassensorvalue=map(Gas_measure,0,1023,0,255);
+  Serial.print("temperature: ");
+  Serial.print(temperature);
+  Serial.println("%");
+  Serial.print("Gas measurement: ");
+  Serial.print(gassensorvalue);
+  
+  
+  
+  
+  if( gassensorvalue>10 && temperature>50.00)
+  {
+    digitalWrite(LED_Sensor,HIGH);
+    digitalWrite(Piezo_Buzzer,HIGH);
+    Serial.print("Fire detected !! ");
+    
+  }
+  else
+  {
+    digitalWrite(LED_Sensor,LOW);
+    digitalWrite(Piezo_Buzzer,LOW);
+  }
+  
+  delay(1000);
+}
